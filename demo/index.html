@@ -1,0 +1,107 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>噪句 - 多自然语言语句成分随机组合器</title>
+        <meta name="description" content="噪句可以干什么？噪句生成一段文字。你可以规定生成规则，设置词库，然后你就可以轻松得到一句不严肃的话，或者一首所谓“现代诗”用来投给某个小刊物（记得分红！）。">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="apple-touch-icon" href="icon.png">
+        <!-- Place favicon.ico in the root directory -->
+        
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">您正在使用的浏览器不仅可以使我回忆起童年往事，也可以使得该网页<b>无法正常运行</b>。<a href="https://browsehappy.com/">脱贫你的浏览器</a></p>
+        <![endif]-->
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand">噪句</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="zj-header" style="margin-bottom:0;" tabindex="-1">
+            <div class="container">
+                <p>一位智者曾经曰过：</p>
+                <h1 id="output-field">这句话不是我说的。</h1>
+                <button id="btn-gen" class="btn btn-primary btn-lg" type="button">点我有惊喜</button>
+                <button id="btn-copy" class="btn btn-link" style="color:#fd9;">复制</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <h2 class="page-header">添加词语</h2>
+                    <form id="form-reg-word" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="reg-word-val" class="col-sm-3 control-label">内容</label>
+                            <div class="col-sm-9">
+                                <input id="reg-word-val" type="text" class="form-control" placeholder="不超过64个字" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-word-tags" class="col-sm-3 control-label zj-code-view">标签</label>
+                            <div class="col-sm-9 control-label">
+                                <input id="reg-word-tags" type="text" class="form-control" placeholder="多个标签用逗号或顿号隔开" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <p>
+                                    <button id="btn-reg-word" class="btn btn-default" type="submit">添加</button>
+                                    <span id="reg-word-status" class="zj-inline-alert"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <h2 class="page-header">设定生成规则</h2>
+                    <form id="form-set-pattern">
+                        <div class="form-group">
+                            <label for="pattern-src" class="control-label">生成规则</label>
+                            <textarea id="pattern-src" class="form-control zj-code-view" rows="5">[
+    {"type": "tag", "value": "time"},
+    {"type": "text", "value": "，"},
+    {"type": "tag", "value": "person"},
+    {"type": "text", "value": "在"},
+    {"type": "tag", "value": "location"},
+    {"type": "tag", "value": "event"},
+    {"type": "text", "value": "。"}
+]</textarea>
+                        </div>
+                        <div class="form-group">
+                            <p>
+                                <button id="btn-set-pattern" class="btn btn-default" type="submit">设定</button>
+                                <span id="set-pattern-status" class="zj-inline-alert"></span>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="zj-footer">
+            <div class="container">
+                <p><a href="#"  data-toggle="modal" data-target=".about-zj-modal">噪句 0.9.0</a>，由各路江湖人士共同打造。<a href="http://www.seahore.com" target="_blank">施胡埃</a>随手出品。</p>
+                <p>源码依据 <a rel="license" href="../LICENSE">MIT License</a> 进行授权。</p>
+            </div>
+        </footer>
+        
+        <script src="https://cdn.bootcss.com/modernizr/2.8.3/modernizr.min.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+        <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="../dist/zaoju.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

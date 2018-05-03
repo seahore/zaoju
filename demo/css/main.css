@@ -1,0 +1,126 @@
+/*
+ * Page headers
+ *
+ * Jumbotron-esque headers at the top of every page that's not the homepage.
+ */
+
+.zj-header {
+  position: relative;
+  padding: 30px 0;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #fd9;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0,0,0,.1);
+  background-color: #f90;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f80), to(#fa0));
+  background-image: -webkit-linear-gradient(top, #f80 0%, #fa0 100%);
+  background-image:      -o-linear-gradient(top, #f80 0%, #fa0 100%);
+  background-image:         linear-gradient(to bottom, #f80 0%, #fa0 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f80', endColorstr='#fa0', GradientType=0);
+  background-repeat: repeat-x;
+}
+
+.zj-header h1 {
+  margin-top: 0;
+  color: #fff;
+}
+.zj-header p {
+  margin-bottom: 0;
+  font-weight: 300;
+  line-height: 1.4;
+}
+.zj-header .container {
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .zj-header {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-size: 24px;
+    text-align: left;
+  }
+  .zj-header h1 {
+    font-size: 60px;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 992px) {
+  .zj-header h1,
+  .zj-header p {
+    margin-right: 140px;
+  }
+}
+
+/*
+ * Footer
+ *
+ * Separated section of content at the bottom of all pages, save the homepage.
+ */
+
+.zj-footer {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-top: 100px;
+  color: #888;
+  text-align: center;
+  background-color: #f7f7f7;
+}
+.zj-footer a {
+  color: #f90;
+}
+.zj-footer-links {
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+.zj-footer-links li {
+  display: inline-block;
+}
+.zj-footer-links li + li {
+  margin-left: 15px;
+}
+
+@media (min-width: 768px) {
+  .zj-footer {
+    text-align: left;
+  }
+  .zj-footer p {
+    margin-bottom: 0;
+  }
+}
+
+/*
+ * Alerts
+ */
+
+.zj-inline-alert {
+    display: none;
+}
+.zj-alert-success {
+    color: limegreen;
+}
+.zj-alert-error {
+    color: orangered;
+}
+
+/*
+ * Code views
+ */
+
+.zj-code-view {
+    font-family: monospace;
+}
+
+/*
+ * Covers Bootstrap
+ */
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.navbar-default {
+    background-color: #fff;
+}
