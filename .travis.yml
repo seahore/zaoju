@@ -4,8 +4,7 @@ node_js:
 before_install:
   - npm install -g npm@latest
 install:
-  - npm install mocha chai --save-dev
+  - npm install
   - npm install -g mocha
-  - npm isntall
 script:
   - npm run test
