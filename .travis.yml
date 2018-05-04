@@ -1,3 +1,11 @@
 language: node_js
 node_js:
   - stable
+before_install:
+  - npm install -g npm@latest
+install:
+  - npm install mocha chai --save-dev
+  - npm install -g mocha
+  - npm isntall
+script:
+  - npm run test
