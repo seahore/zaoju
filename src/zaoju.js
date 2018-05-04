@@ -8,8 +8,14 @@
         _dict.location = ["洞庭湖", "麻将馆", "养生馆", "大街上", "路灯下"];
         _dict.person = ["你", "班主任", "总统先生", "一位路人"];
         _dict.event = ["搓脚板", "洗澡", "为爱鼓掌", "裸睡", "捡肥皂"];
-    
-        var getWordWithTag = function (tag) { return _dict[tag]; }
+   
+        var getDict = function () { return _dict; };
+        
+        var setDict = function (d) { _dict = d; };
+
+        var getWordWithTag = function (tag) { return _dict[tag]; };
+
+        var clearDict = function () { _dict = {}; };
     
         var _pattern = [
             {type: "tag", value: "time"},
@@ -20,6 +26,10 @@
             {type: "tag", value: "event"},
             {type: "text", value: "。"},
         ];
+        
+        var getPattern = function () { return _pattern; };
+    
+        var setPattern = function (p) { _pattern = p; };
     
         var regWord = function (val, tags) {
             val = val.trim();
@@ -55,37 +65,37 @@
                     _dict[tags[i]] = [];
                 _dict[tags[i]].push(val);
             }
-        }
+        };
     
-        var setPattern = function (val) {
-            var backupPattern = _pattern;
-    
+        var setPatternInJSON = function (val) {
+            
             try {
-                _pattern = JSON.parse(val);
+               var newPattern = JSON.parse(val);
             }
             catch (e) {
                 throw new Error("语法似乎不太对呢~");
                 return;
             }
         
-            if (!Array.isArray(_pattern)) {
-                _pattern = [_pattern];
+            if (!Array.isArray(newPattern)) {
+                newPattern = [newPattern];
             }
         
             try {
-                for (var i = 0; i < _pattern.length; ++i) {
-                    if (!("type" in _pattern[i]) || !("value" in _pattern[i]))
+                for (var i = 0; i < newPattern.length; ++i) {
+                    if (!("type" in newPattern[i]) || !("value" in newPattern[i]))
                         throw new Error("检查第" + i.toString() + "个元素中type或value的拼写");
-                    else if (typeof _pattern[i].type !== "string" || _pattern[i].type === "" || typeof _pattern[i].value !== "string" || _pattern[i].value === "")
+                    else if (typeof newPattern[i].type !== "string" || newPattern[i].type === "" || typeof newPattern[i].value !== "string" || newPattern[i].value === "")
                         throw new Error("第" + i.toString() + "个元素的属性值须为非空字符串");
                 }
             }
             catch (e) {
-                _pattern = backupPattern;
                 throw e;
                 return;
             }
-        }
+            
+            _pattern = newPattern;
+        };
         
         var genSentence = function () {
             var output = "";
@@ -104,14 +114,39 @@
             return output;
         };
     
+    /*
+    
+    // 检查两个生成规则(pattern)是否相等，注意：不检查结构是否合法
+    var comparePatterns = function (p1, p2) {
+        if (!Array.isArray(p1) || !Array.isArray(p2))
+            throw new TypeError('arguments of function comparePatterns should be arrays.');
+        
+        if (p1.length !== p2.length)
+            return false;
+        
+        for ( var i = 0; i < p1.length; ++i) {
+            if (p1[i].type !== p2[i].type || p1[i].value !== p2[i].value)
+                return false;
+        }
+        
+        return true;
+    };
+    
+    */
+    
         return {
+            getDict: getDict,
             getWordWithTag: getWordWithTag,
             regWord: regWord,
+            setDict: setDict,
+            clearDict: clearDict,
+            getPattern: getPattern,
             setPattern: setPattern,
+            setPatternInJSON: setPatternInJSON,
             genSentence: genSentence,
         };
     }());
-	
+    
     
     var zaoju = Zaoju;
     if (typeof module !== 'undefined' && typeof exports === 'object') {

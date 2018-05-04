@@ -1,6 +1,6 @@
 由于本人高三，今年高考之前无暇维护，敬请谅解。
 # 噪句
-[![Build Status](http://img.shields.io/travis/tttttan/zaoju/master.svg?style=flat)](https://travis-ci.org/tttttan/zaoju)
+[![Build Status](http://img.shields.io/travis/TTTTTAN/zaoju/master.svg?style=flat)](https://travis-ci.org/tttttan/zaoju)
 ![Just for Fun](https://img.shields.io/badge/just-for%20fun-orange.svg)
 
 **噪句** 是一个多自然语言语句成分随机组合系统，简单点说，就是**随机造句**。
@@ -8,7 +8,11 @@
 1. 设定生成规则；
 2. 补充随机词库；
 3. 然后你就可以轻松得到一句不严肃的话，或者一首所谓“现代诗”用来投给某个小刊物。
-## 如何在网页上运行
+## 安装
+还没到npm上，到时候吧。
+## 使用
+噪句API被包含在一个唯一命名空间对象`Zaoju`中。
+### 如何在网页上运行
 （最好在文档末）包含`zaoju.js`，然后只需要在页面上创建：
 + 一个文本元素，用以输出生成的文字；
 + 几个按钮，特定按钮的`onclick`调用`zaoju.js`中的特定API函数，并作适当的异常处理；
@@ -21,6 +25,7 @@
 + 老王，标签有“人物”，“男性”
 + 教室，标签有“地点”，“在学校内”，“可燃”
 + 皮卡丘，标签有“带电”，“非人类”，“黄（颜）色”，“可吸”
+
 词元是一个概念，用代码实现时，一个词元可能并不被某个对象映射。
 ### 词库
 **词库**是唯一的，它包含若干个标签数组，每个标签数组里的元素均是拥有该标签的词元的文字内容（字符串）。
