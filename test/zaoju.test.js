@@ -109,6 +109,7 @@ describe('genSentence: ', function() {
     
     it('Test 1', function() {
         Zaoju.clearDict();
+        Zaoju.setPattern(p1);
         Zaoju.regWord('现在','time');
         Zaoju.regWord('你','person');
         Zaoju.regWord('电脑前','location');
