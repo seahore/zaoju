@@ -1,6 +1,6 @@
 由于本人高三，今年高考之前无暇维护，敬请谅解。
 # 噪句
-[![Build Status](http://img.shields.io/travis/TTTTTAN/zaoju/master.svg?style=flat)](https://travis-ci.org/tttttan/zaoju)
+[![Build Status](http://img.shields.io/travis/TTTTTAN/zaoju/master.svg?style=flat)](https://travis-ci.org/TTTTTAN/zaoju)
 ![Just for Fun](https://img.shields.io/badge/just-for%20fun-orange.svg)
 
 **噪句** 是一个多自然语言语句成分随机组合系统，简单点说，就是**随机造句**。
