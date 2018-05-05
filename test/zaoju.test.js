@@ -58,7 +58,7 @@ describe('setPatternInJSON: ', function() {
     var j4 = '[{"epyt": "text", "value": "foo"}]';
     var j5 = '[{"type": "", "value": "foo"}]';
     
-    it('JSON pattern 1 - valid, should be accepted', function() {
+    it('JSON pattern 1 - valid, should be accepted and be as expected', function() {
         Zaoju.setPattern(d);
         Zaoju.setPatternInJSON(j1);
         expect(Zaoju.getPattern()).to.deep.equal(JSON.parse(j1));
@@ -74,7 +74,7 @@ describe('setPatternInJSON: ', function() {
         }
         throw new Error('No error was throwed when parsing JSON pattern 2.');
     });
-    it('JSON pattern 3 - not an array, should be accepted', function() {
+    it('JSON pattern 3 - not an array, should be accepted and be as expected', function() {
         Zaoju.setPattern(d);
         Zaoju.setPatternInJSON(j3);
         expect(Zaoju.getPattern()).to.deep.equal( [ JSON.parse(j3) ] );
@@ -90,7 +90,7 @@ describe('setPatternInJSON: ', function() {
         }
         throw new Error('No error was throwed when parsing JSON pattern 4.');
     });
-    it('JSON pattern 5, bad values should throw an error and the pattern should remain', function() {
+    it('JSON pattern 5 - bad values should throw an error and the pattern should remain', function() {
         Zaoju.setPattern(d);
         try {
             Zaoju.setPatternInJSON(j5);
@@ -103,6 +103,42 @@ describe('setPatternInJSON: ', function() {
     });
 });
 
+describe('setPatternInSPN: ', function() {
+    
+    var s1 = '哎呀[person]，你不要在[location]脱裤子啊......';
+	var s2 = '[person]在[location]';
+	var s3 = '\\嘿，[per\\s\\o\\n]，要使用\\t\\a\\g，只要这样：\\[tag-name\\]。';
+    var s4 = '我是乱打的：[[]]';
+	var s5 = '我还是乱打的：[][][]';
+	
+	var p1 = [{type: "text", value: "哎呀"}, {type: "tag", value: "person"}, {type: "text", value: "，你不要在"}, {type: "tag", value: "location"}, {type: "text", value: "脱裤子啊......"}];
+	var p2 = [{type: "tag", value: "person"}, {type: "text", value: "在"}, {type: "tag", value: "location"}];
+	var p3 = [{type: "text", value: "嘿，"}, {type: "tag", value: "person"}, {type: "text", value: "，要使用tag，只要这样：[tag-name]。"}];
+	var p4 = [{type: "text", value: "我是乱打的："}, {type: "tag", value: "["}, {type: "text", value: "]"}];
+	var p5 = [{type: "text", value: "我还是乱打的："}];
+	
+    it('SPN pattern 1 - valid, should be accepted and be as expected', function() {
+        Zaoju.setPatternInSPN(s1);
+        expect(Zaoju.getPattern()).to.deep.equal(p1);
+    });
+	it("SPN pattern 2 - valid, start with '[', should be accepted and be as expected", function() {
+        Zaoju.setPatternInSPN(s2);
+        expect(Zaoju.getPattern()).to.deep.equal(p2);
+    });
+	it("SPN pattern 3 - valid, contains escape chars, should be accepted and be as expected", function() {
+        Zaoju.setPatternInSPN(s3);
+        expect(Zaoju.getPattern()).to.deep.equal(p3);
+    });
+	it("SPN pattern 4 - valid, contains nested brackets, should be accepted and be as expected", function() {
+        Zaoju.setPatternInSPN(s4);
+        expect(Zaoju.getPattern()).to.deep.equal(p4);
+    });
+	it("SPN pattern 5 - valid, contains empty tags, should be accepted and be as expected", function() {
+        Zaoju.setPatternInSPN(s5);
+        expect(Zaoju.getPattern()).to.deep.equal(p5);
+    });
+});
+    
 describe('genSentence: ', function() {
     
     var p1 = [{"type": "tag", "value": "time"},{"type": "text", "value": "，"},{"type": "tag", "value": "person"},{"type": "text", "value": "在"},{"type": "tag", "value": "location"},{"type": "tag", "value": "event"},{"type": "text", "value": "。"}];

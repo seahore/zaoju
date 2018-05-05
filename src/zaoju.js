@@ -4,9 +4,9 @@
     
         var _dict = {};
         
-        _dict.time = ["汉武帝时期", "解放前", "上课时", "月黑风高的晚上"];
+        _dict.time = ["汉武帝时期", "解放前", "上课时", "月黑风高的晚上", "刚才"];
         _dict.location = ["洞庭湖", "麻将馆", "养生馆", "大街上", "路灯下"];
-        _dict.person = ["你", "班主任", "总统先生", "一位路人"];
+        _dict.person = ["你", "班主任", "总统先生", "一位路人", "没有人"];
         _dict.event = ["搓脚板", "洗澡", "为爱鼓掌", "裸睡", "捡肥皂"];
    
         var getDict = function () { return _dict; };
@@ -32,6 +32,9 @@
         var setPattern = function (p) { _pattern = p; };
     
         var regWord = function (val, tags) {
+            if (typeof val !== 'string' || typeof tags !== 'string')
+                throw new TypeError('regWord的参数类型有误');
+            
             val = val.trim();
         
             if (val === "") {
@@ -39,8 +42,7 @@
                 return;
             }
             
-            tags = tags.trim();
-            tags = tags.split(/[,，、]/);
+            tags = tags.trim().split(/[,，、]/);
             // 去除tags数组内所有的空字符串
             var i = 0;
             while(i < tags.length) {
@@ -97,6 +99,56 @@
             _pattern = newPattern;
         };
         
+        var setPatternInSPN = function (val) {
+            if (typeof val !== 'string')
+                throw new Error('setPatternInSPN 参数须为字符串');
+            
+            var newPattern = [];
+            
+            val = val.trim();
+            
+            // 解析
+            var curElement = {type:"text", value: ""};
+            for (var i = 0; i < val.length; ++i) {
+                if (val[i] === '[') {
+                    if (curElement.type === "tag") {
+                        curElement.value += '[';
+                        continue;
+                    }
+                    newPattern.push(curElement);
+                    curElement = {type: "tag", value: ""};
+                    continue;
+                }
+                if (val[i] === ']') {
+                    if (curElement.type === "text") {
+                        curElement.value += ']';
+                        continue;
+                    }
+                    newPattern.push(curElement);
+                    curElement = {type: "text", value: ""};
+                    continue;
+                }
+                if (val[i] === '\\') {
+                    curElement.value += val[i+1];
+                    ++i;
+                    continue;
+                }
+                curElement.value += val[i];
+                continue;
+            }
+            newPattern.push(curElement);
+            // 去空串
+            var i = 0;
+            while(i < newPattern.length) {
+                if(newPattern[i].value === "")
+                    newPattern.splice(i, 1);
+                else
+                    ++i;
+            }
+            
+            _pattern = newPattern;
+        };
+        
         var genSentence = function () {
             var output = "";
             for (var i = 0; i < _pattern.length; ++i) {
@@ -143,6 +195,7 @@
             getPattern: getPattern,
             setPattern: setPattern,
             setPatternInJSON: setPatternInJSON,
+            setPatternInSPN: setPatternInSPN,
             genSentence: genSentence,
         };
     }());
