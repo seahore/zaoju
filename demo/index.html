@@ -28,10 +28,16 @@
         
         <div class="zj-header" style="margin-bottom:0;" tabindex="-1">
             <div class="container">
-                <p>一位智者曾经曰过：</p>
-                <h1 id="output-field">这句话不是我说的。</h1>
-                <button id="btn-gen" class="btn btn-primary btn-lg" type="button">点我有惊喜</button>
-                <button id="btn-copy" class="btn btn-link" style="color:#fd9;">复制</button>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button id="btn-gen" class="btn btn-primary btn-lg" type="button">点我有惊喜</button>
+                        <button id="btn-copy" class="btn btn-link" style="color:#fd9;">复制</button>
+                    </div>
+                    <div class="col-md-10">
+                        <p>一位智者曾经曰过：</p>
+                        <h1 id="output-field">这句话不是我说的。</h1>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="container">
@@ -65,16 +71,21 @@
                     <h2 class="page-header">设定生成规则</h2>
                     <form id="form-set-pattern">
                         <div class="form-group">
-                            <label for="pattern-src" class="control-label">生成规则</label>
-                            <textarea id="pattern-src" class="form-control zj-code-view" rows="5">[
-    {"type": "tag", "value": "time"},
-    {"type": "text", "value": "，"},
-    {"type": "tag", "value": "person"},
-    {"type": "text", "value": "在"},
-    {"type": "tag", "value": "location"},
-    {"type": "tag", "value": "event"},
-    {"type": "text", "value": "。"}
-]</textarea>
+                            <label for="pattern-src" class="control-label">规则内容</label>
+                            <textarea id="pattern-src" class="form-control zj-code-view" rows="3">[time]，[person]在[location][event]。</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="pattern-notation" class="control-label">表示法</label>
+                            <div id="pattern-notation">
+                                <label class="radio-inline">
+                                     <input id="radio-pattern-spn" type="radio" name="pattern-notation" value="SPN" checked>
+                                    简单表示法
+                                </label>
+                                <label class="radio-inline">
+                                    <input id="radio-pattern-json" type="radio" name="pattern-notation" value="JSON">
+                                    JSON
+                                </label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <p>
@@ -89,7 +100,7 @@
         
         <footer class="zj-footer">
             <div class="container">
-                <p><a href="#"  data-toggle="modal" data-target=".about-zj-modal">噪句 0.9.0</a>，由各路江湖人士共同打造。<a href="http://www.seahore.com" target="_blank">施胡埃</a>随手出品。</p>
+                <p><a href="#">噪句 0.9.1</a>，由各路江湖人士共同打造。<a href="http://github.com/TTTTTAN" target="_blank">施胡埃</a>随手出品。</p>
                 <p>源码依据 <a rel="license" href="../LICENSE">MIT License</a> 进行授权。</p>
             </div>
         </footer>
@@ -99,9 +110,8 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
         <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://cdn.bootcss.com/clipboard.js/2.0.0/clipboard.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="../dist/zaoju.min.js"></script>
+		<script src="../dist/zaoju.min.js"></script>
+		<script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>
